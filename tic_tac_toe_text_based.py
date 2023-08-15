@@ -3,11 +3,11 @@
 
 # x:y
 
-ttt_map = ([[" ", "|", " ", "|", " "],  # 1:1 | 3:1 | 5:1
+ttt_map = ([["X", "|", "N", "|", "L"],  # 5:5 | 5:3 | 5:1
             ["_", "+", "_", "+", "_"],  #
-            [" ", "|", "O", "|", " "],  # 1:3 | 3:3 | 5:3
+            ["H", "|", "O", "|", "T"],  # 3:5 | 3:3 | 3:1
             ["_", "+", "_", "+", "_"],  #
-            [" ", "|", " ", "|", "1"]]) # 1:5 | 3:5 | 5:5
+            ["A", "|", "G", "|", "1"]]) # 1:5 | 1:5 | 1:1
 
 valid_inputs = ([[1, 1],
                  [3, 1],
@@ -27,7 +27,10 @@ def check_for_valid_input(x, y):
 
 def get_player():
     player = input("Please Choose if you are X or O\n"
-                   ">> ")
+                   ">> ").upper()
+    if not player in ("O", "X"):
+        print("\nYou have to choose between X and O")
+        return get_player()
     return player
 
 def edit_coordination(player):
@@ -42,6 +45,8 @@ def edit_coordination(player):
 
     if check_for_valid_input(x, y):
         print_coordination_data(x, y)
+    else:
+        print("Error: Invalid Coordination's")
 
 def run():
     print('\n'.join([''.join(['{:4}'.format(item) for item in row])
@@ -50,9 +55,6 @@ def run():
     print("\nThis is the state of the board\n")
 
     player = get_player()
-    if not player in ("O", "X"):
-        print("\nYou have to choose between X and O")
-        player = get_player()
 
     print("\nYou are Player " + player)
 

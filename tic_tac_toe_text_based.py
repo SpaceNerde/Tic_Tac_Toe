@@ -3,11 +3,18 @@
 
 # x:y
 
-ttt_map = ([["X", "|", "N", "|", "L"],  # 5:5 | 5:3 | 5:1
+ttt_map = ([[" ", "|", " ", "|", " "],  # 5:5 | 5:3 | 5:1
             ["_", "+", "_", "+", "_"],  #
-            ["H", "|", "O", "|", "T"],  # 3:5 | 3:3 | 3:1
+            [" ", "|", " ", "|", " "],  # 3:5 | 3:3 | 3:1
             ["_", "+", "_", "+", "_"],  #
-            ["A", "|", "G", "|", "1"]]) # 1:5 | 1:5 | 1:1
+            [" ", "|", " ", "|", " "]]) # 1:5 | 1:5 | 1:1
+
+ttt_map_player_positions = \
+          ([["1", "|", "2", "|", "3"],  # 5:5 | 5:3 | 5:1
+            ["_", "+", "_", "+", "_"],  #
+            ["4", "|", "5", "|", "6"],  # 3:5 | 3:3 | 3:1
+            ["_", "+", "_", "+", "_"],  #
+            ["7", "|", "8", "|", "9"]]) # 1:5 | 1:5 | 1:1
 
 valid_inputs = ([[1, 1],
                  [3, 1],
@@ -19,11 +26,9 @@ valid_inputs = ([[1, 1],
                  [3, 5],
                  [5, 5]])
 
-def check_for_valid_input(x, y):
-    if [x, y] in valid_inputs:
-        return True
-    else:
-        return False
+def convert_input(INPUT):
+    print(valid_inputs[-INPUT])
+    return valid_inputs[-INPUT]
 
 def get_player():
     player = input("Please Choose if you are X or O\n"
@@ -34,23 +39,29 @@ def get_player():
     return player
 
 def edit_coordination(player):
-    print("\nPick x and y coordination to place your "+player)
+    print("\nPick between 1 and 9 to place your "+player)
 
     try:
-        x = int(input("\nx: "))
-        y = int(input("y: "))
+        pos = int(input("\nchoose position: "))
     except ValueError:
-        print("\nYou have to pick two integers as coordination's")
+        print("\nYou have to pick a integer as position")
         return edit_coordination(player)
 
-    if check_for_valid_input(x, y):
-        print_coordination_data(x, y)
-    else:
-        print("Error: Invalid Coordination's")
+    ttt_map[5][5] = player
+
+    print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+                     for row in ttt_map]))
 
 def run():
+    print("\n")
+
     print('\n'.join([''.join(['{:4}'.format(item) for item in row])
       for row in ttt_map]))
+
+    print("\n")
+
+    print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+                     for row in ttt_map_player_positions]))
 
     print("\nThis is the state of the board\n")
 

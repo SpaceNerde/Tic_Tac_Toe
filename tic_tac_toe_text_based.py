@@ -4,11 +4,11 @@ from nltk import pr
 
 # x:y
 
-ttt_map = ([[" ", "|", " ", "|", " "],  # 0:0 | 2:0 | 4:0
+ttt_map = ([[" ", "|", " ", "|", " "],  # 1:1 | 3:1 | 5:1
             ["_", "+", "_", "+", "_"],  #
-            [" ", "|", "O", "|", " "],  # 0:2 | 2:2 | 4:2
+            [" ", "|", "O", "|", " "],  # 1:3 | 3:3 | 5:3
             ["_", "+", "_", "+", "_"],  #
-            [" ", "|", " ", "|", " "]]) # 0:4 | 2:4 | 4:4
+            [" ", "|", " ", "|", " "]]) # 1:5 | 3:5 | 5:5
 
 def run():
     print('\n'.join([''.join(['{:4}'.format(item) for item in row])
@@ -18,4 +18,4 @@ def print_coordination_data(x, y):
     if not isinstance(x and y, int):
         return print("ERROR: You have to choose two integers as x and y")
 
-    print(x, y)
+    print(ttt_map[-x][-y])

@@ -14,21 +14,27 @@ ttt_map_player_positions = \
             ["_", "+", "_", "+", "_"],  #
             ["4", "|", "5", "|", "6"],  # 3:5 | 3:3 | 3:1
             ["_", "+", "_", "+", "_"],  #
-            ["7", "|", "8", "|", "9"]]) # 1:5 | 1:5 | 1:1
+            ["7", "|", "8", "|", "9"]]) # 1:5 | 1:3 | 1:1
 
-valid_inputs = ([[1, 1],
-                 [3, 1],
-                 [5, 1],
-                 [1, 3],
-                 [3, 3],
-                 [5, 3],
-                 [1, 5],
-                 [3, 5],
-                 [5, 5]])
-
-def convert_input(INPUT):
-    print(valid_inputs[-INPUT])
-    return valid_inputs[-INPUT]
+def big_shity_if_block(INPUT, player):
+    if INPUT == 1:
+        ttt_map[-5][-5] = player
+    elif INPUT == 2:
+        ttt_map[-5][-3] = player
+    elif INPUT == 3:
+        ttt_map[-5][-1] = player
+    elif INPUT == 4:
+        ttt_map[-3][-5] = player
+    elif INPUT == 5:
+        ttt_map[-3][-3] = player
+    elif INPUT == 6:
+        ttt_map[-3][-1] = player
+    elif INPUT == 7:
+        ttt_map[-1][-5] = player
+    elif INPUT == 8:
+        ttt_map[-1][-3] = player
+    elif INPUT == 9:
+        ttt_map[-1][-1] = player
 
 def get_player():
     player = input("Please Choose if you are X or O\n"
@@ -47,7 +53,7 @@ def edit_coordination(player):
         print("\nYou have to pick a integer as position")
         return edit_coordination(player)
 
-    ttt_map[5][5] = player
+    big_shity_if_block(pos, player)
 
     print('\n'.join([''.join(['{:4}'.format(item) for item in row])
                      for row in ttt_map]))
@@ -69,6 +75,7 @@ def run():
 
     print("\nYou are Player " + player)
 
+    print("\n it is your turn player ")
     edit_coordination(player)
 
 def print_coordination_data(x, y):

@@ -42,7 +42,12 @@ def get_player():
     if not player in ("O", "X"):
         print("\nYou have to choose between X and O")
         return get_player()
-    return player
+
+    if player == "X":
+        players = "X", "O"
+    else:
+        players = "O", "X"
+    return players
 
 def edit_coordination(player):
     print("\nPick between 1 and 9 to place your "+player)
@@ -71,12 +76,14 @@ def run():
 
     print("\nThis is the state of the board\n")
 
-    player = get_player()
+    player_1, player_2 = get_player()
 
-    print("\nYou are Player " + player)
+    while True:
+        print("\nIt is your turn player " + player_1)
+        edit_coordination(player_1)
 
-    print("\n it is your turn player ")
-    edit_coordination(player)
+        print("\nIt is your turn player " + player_2)
+        edit_coordination(player_2)
 
 def print_coordination_data(x, y):
     if not isinstance(x and y, int):
